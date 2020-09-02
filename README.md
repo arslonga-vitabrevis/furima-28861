@@ -1,4 +1,4 @@
-#　テーブル設計
+# テーブル設計
 
 ## users
 
@@ -12,14 +12,12 @@
 | first_name          | string  | null: false |
 | family_name_reading | string  | null: false |
 | first_name_reading  | string  | null: false |
-| birth_year          | integer | null: false |
-| birth_month         | integer | null: false |
-| birth_day           | integer | null: false |
+| date_of_birth       | datetime | null: false |
 
 ### Association
 
 - has many :items
-- has one :transaction
+- has many :transactions
 
 
 ## items
@@ -39,35 +37,36 @@
 ### Association
 
 - belongs_to :user
-- has one :transaction, through: item_transactions
+- has one :transaction
+- has one :address
 
 
-## transactions
+## addresses
 
-| Column           | Type       | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| postal_code      | string     | null: false                    |
-| prefecture       | integer    | null: false                    |
-| city             | string     | null: false                    |
-| house_number     | string     | null: false                    |
-| building_name    | string     |                                |
-| telephone_number | string     | null: false                    |
-| user_id          | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
-- has many :items, through: item_transactions
-
-
-## item_transactions
-
-| Column         | Type       | Options                        |
-| -------------- | ---------- | ------------------------------ |
-| item_id        | references | null: false, foreign_key: true |
-| transaction_id | references | null: false, foreign_key: true |
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| postal_code         | string     | null: false                    |
+| prefecture          | integer    | null: false                    |
+| city                | string     | null: false                    |
+| house_number        | string     | null: false                    |
+| building_name       | string     |                                |
+| telephone_number    | string     | null: false                    |
+| item_id             | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :item
-- belongs_to :transaction
+
+
+## transactions
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user_id | references | null: false, foreign_key: true |
+| item_id | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
