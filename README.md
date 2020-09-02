@@ -12,14 +12,12 @@
 | first_name          | string  | null: false |
 | family_name_reading | string  | null: false |
 | first_name_reading  | string  | null: false |
-| birth_year          | integer | null: false |
-| birth_month         | integer | null: false |
-| birth_day           | integer | null: false |
+| date_of_birth       | integer | null: false |
 
 ### Association
 
 - has many :items
-- has one :transaction
+- has many :transactions
 
 
 ## items
@@ -44,15 +42,16 @@
 
 ## transactions
 
-| Column           | Type       | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| postal_code      | string     | null: false                    |
-| prefecture       | integer    | null: false                    |
-| city             | string     | null: false                    |
-| house_number     | string     | null: false                    |
-| building_name    | string     |                                |
-| telephone_number | string     | null: false                    |
-| user_id          | references | null: false, foreign_key: true |
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| postal_code         | string     | null: false                    |
+| prefecture          | integer    | null: false                    |
+| city                | string     | null: false                    |
+| house_number        | string     | null: false                    |
+| building_name       | string     |                                |
+| telephone_number    | string     | null: false                    |
+| user_id             | references | null: false, foreign_key: true |
+| item_transaction_id | references | null: false, foreign_key: true |
 
 ### Association
 
