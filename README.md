@@ -16,8 +16,8 @@
 
 ### Association
 
-- has many :items
-- has many :orders
+- has_many :items
+- has_many :orders
 
 
 ## items
@@ -37,8 +37,7 @@
 ### Association
 
 - belongs_to :user
-- has one :order
-- has one :address
+- has_one :order
 
 
 ## addresses
@@ -51,14 +50,14 @@
 | house_number        | string     | null: false                    |
 | building_name       | string     |                                |
 | telephone_number    | string     | null: false                    |
-| item_id             | references | null: false, foreign_key: true |
+| order_id             | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :item
+- belongs_to :order
 
 
-## order
+## orders
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
