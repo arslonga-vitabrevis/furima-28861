@@ -12,7 +12,7 @@
 | first_name          | string  | null: false |
 | family_name_reading | string  | null: false |
 | first_name_reading  | string  | null: false |
-| date_of_birth       | datetime | null: false |
+| date_of_birth      | datetime | null: false |
 
 ### Association
 
@@ -32,7 +32,7 @@
 | shipping_origin | integer    | null: false                    |
 | shipping_period | integer    | null: false                    |
 | price           | integer    | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -50,7 +50,7 @@
 | house_number        | string     | null: false                    |
 | building_name       | string     |                                |
 | telephone_number    | string     | null: false                    |
-| order_id             | references | null: false, foreign_key: true |
+| order               | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -61,12 +61,12 @@
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-
+- has_one :address
