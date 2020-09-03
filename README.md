@@ -17,7 +17,7 @@
 ### Association
 
 - has many :items
-- has many :transactions
+- has many :orders
 
 
 ## items
@@ -37,7 +37,7 @@
 ### Association
 
 - belongs_to :user
-- has one :transaction
+- has one :order
 - has one :address
 
 
@@ -58,7 +58,7 @@
 - belongs_to :item
 
 
-## transactions
+## order
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
