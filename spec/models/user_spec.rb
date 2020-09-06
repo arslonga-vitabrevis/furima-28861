@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
       it "password_confirmationが空だと保存ができないこと" do
         @user.password_confirmation = ""
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+        expect(@user.errors.full_messages).to include("Password confirmation can't be blank")
       end
       it "passwordが5文字以下であれば保存できないこと" do
         @user.password = "abc12"
@@ -79,6 +79,16 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name can't be blank")
       end
+      it "family_nameが全角（漢字・平仮名・カタカナ）でないと保存できないこと" do
+        @user.family_name = "yamada"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name は全角で入力してください。")
+      end
+      it "first_nameが全角（漢字・平仮名・カタカナ）でないと保存できないこと" do
+        @user.first_name = "rikutaro"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name は全角で入力してください。")
+      end
       it "family_name_readingが空だと保存できないこと" do
         @user.family_name_reading = ""
         @user.valid?
@@ -88,7 +98,17 @@ RSpec.describe User, type: :model do
         @user.first_name_reading = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("First name reading can't be blank")
-      end      
+      end
+      it "first_name_readingが全角カタカナでないと保存できないこと" do
+        @user.first_name_reading = "やまだ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name reading は全角カナで入力してください。")
+      end
+      it "family_name_readingが全角カタカナでないと保存できないこと" do
+        @user.family_name_reading = "りくたろ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name reading は全角カナで入力してください。")
+      end
       it "date_of_birthが空だと保存できないこと" do
         @user.date_of_birth = ""
         @user.valid?
