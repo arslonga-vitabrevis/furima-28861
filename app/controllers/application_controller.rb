@@ -20,8 +20,7 @@ class ApplicationController < ActionController::Base
       :first_name,
       :family_name_reading,
       :first_name_reading,
-      :date_of_birth,
+      :date_of_birth
     ])
   end
 end
- 
