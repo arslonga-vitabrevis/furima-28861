@@ -3,6 +3,14 @@ class Item < ApplicationRecord
   has_one :order
   has_one_attached :image
 
+  extend ActiveHash::Associations::ActiveRecordExtentions
+  #modelファイル名？(スネークケース)
+  belongs_to_active_hash :item_category
+  belongs_to_active_hash :item_condition
+  belongs_to_active_hash :shipping_charge
+  belongs_to_active_hash :shipping_period
+  belongs_to_active_hash :prefecture
+
   with_options presence: true do
     validates :name,                length: { maximum:40 }
     validates :text,                length: { maximum:1000 }
