@@ -3,8 +3,7 @@ class Item < ApplicationRecord
   has_one :order
   has_one_attached :image
 
-  extend ActiveHash::Associations::ActiveRecordExtentions
-  #modelファイル名？(スネークケース)
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :item_category
   belongs_to_active_hash :item_condition
   belongs_to_active_hash :shipping_charge
@@ -20,10 +19,10 @@ class Item < ApplicationRecord
     validates :shipping_origin_id
     validates :shipping_period_id
     validates :price,               numericality: { greater_than_or_equal_to:300, less_than_or_equal_to: 9999999 }
-    validates :user
+    validates :user_id
   end
 
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 0 } do
     validates :item_category_id
     validates :item_condition_id
     validates :shipping_charge_id
