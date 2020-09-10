@@ -23,6 +23,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @pref_id = @item.shipping_origin_id
+    @prefecture = Prefecture.find(@pref_id)
   end
 
   private
