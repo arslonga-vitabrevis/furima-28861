@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:show]
+
   def index
     @items = Item.all.includes(:user).order("created_at DESC")
     @orders = Order.all.includes(:item, :user)
@@ -20,6 +22,9 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
   def item_params
@@ -33,5 +38,9 @@ class ItemsController < ApplicationController
       :shipping_origin_id,
       :shipping_period_id,
       :price).merge(user_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 end
