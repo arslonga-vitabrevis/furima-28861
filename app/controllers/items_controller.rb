@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show]
+  before_action :set_item, only: [:show, :edit]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -26,6 +26,12 @@ class ItemsController < ApplicationController
     @orders = Order.includes(:item, :user)
     @pref_id = @item.shipping_origin_id
     @prefecture = Prefecture.find(@pref_id)
+  end
+
+  def edit
+  end
+
+  def update
   end
 
   private
