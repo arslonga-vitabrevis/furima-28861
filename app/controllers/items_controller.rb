@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show]
+  before_action :set_item, only: [:show, :edit, :update]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -26,6 +26,20 @@ class ItemsController < ApplicationController
     @orders = Order.includes(:item, :user)
     @pref_id = @item.shipping_origin_id
     @prefecture = Prefecture.find(@pref_id)
+  end
+
+  def edit
+    unless user_signed_in? && current_user.id == @item.user_id
+      redirect_to new_user_session_path
+    end
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render :edit
+    end
   end
 
   private
