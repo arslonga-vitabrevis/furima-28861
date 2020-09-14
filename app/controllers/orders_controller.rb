@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :set_item, only: [:index, :create]
+
   def index
     @order = AddressOrder.new
-    @item = Item.find_by(id:params[:item_id])
   end
 
   def create
-    @item = Item.find_by(id:params[:item_id])
     @order = AddressOrder.new(order_params)
     if @order.save
       redirect_to root_path
@@ -25,5 +25,8 @@ class OrdersController < ApplicationController
       :building_name,
       :order_id,
       :item_id).merge(user_id: current_user.id)
+  end
+  def set_item
+    @item = Item.find_by(id:params[:item_id])
   end
 end
