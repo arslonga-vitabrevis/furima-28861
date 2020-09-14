@@ -13,4 +13,17 @@ class OrdersController < ApplicationController
       render :index
     end
   end
+
+  private
+  def order_params
+    params.permit(
+      :postal_code,
+      :prefecture_id,
+      :city,
+      :house_number,
+      :telephone_number,
+      :building_name,
+      :order_id,
+      :item_id).merge(user_id: current_user.id)
+  end
 end
