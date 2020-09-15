@@ -1,6 +1,7 @@
 class AddressOrder
   include ActiveModel::Model
-  attr_accessor :postal_code,
+  attr_accessor :token,
+                :postal_code,
                 :prefecture_id,
                 :city,
                 :house_number,
@@ -11,11 +12,12 @@ class AddressOrder
                 :user_id
 
   with_options presence: true do
+    validates :token
     validates :postal_code,      format: { with: /\A\d{3}[-]\d{4}\z/ }
     validates :prefecture_id,    numericality: { other_than: 0 }
     validates :city
     validates :house_number
-    validates :telephone_number, format: { with: /\A\d{11}\z/ }
+    validates :telephone_number, format: { with: /\A\d{10,11}\z/ }
     validates :order_id
     validates :item_id
     validates :user_id
