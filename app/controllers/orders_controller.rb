@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
   private
   def order_params
     params.permit(
-      :token
+      :token,
       :postal_code,
       :prefecture_id,
       :city,
