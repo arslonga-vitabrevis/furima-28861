@@ -15,7 +15,9 @@ class OrdersController < ApplicationController
 
   def create
     @order = AddressOrder.new(order_params)
-    if @order.save
+    if @order.valid?
+      pay_item
+      @order.save
       redirect_to root_path
     else
       render :index
@@ -25,6 +27,7 @@ class OrdersController < ApplicationController
   private
   def order_params
     params.permit(
+      :token
       :postal_code,
       :prefecture_id,
       :city,
