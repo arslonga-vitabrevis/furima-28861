@@ -34,7 +34,19 @@ class OrdersController < ApplicationController
       :order_id,
       :item_id).merge(user_id: current_user.id)
   end
+
   def set_item
     @item = Item.find_by(id:params[:item_id])
+  end
+
+  def pay_item
+    @secret_key = Rails.application.credentials.payjp_keys[:payjp_secret_key]
+
+    Payjp.api_key = @secret_key
+    Payjp::Charge.create(
+      amount: order_params[:price],
+      card: params[:token],
+      currency:'jpy'
+    )
   end
 end
