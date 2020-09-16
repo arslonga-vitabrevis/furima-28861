@@ -17,7 +17,7 @@ class AddressOrder
     validates :prefecture_id,    numericality: { other_than: 0 }
     validates :city
     validates :house_number
-    validates :telephone_number, format: { with: /\A\d{10,11}\z/ }
+    validates :telephone_number, format: { with: /\A\d{10,11}\z/ }, length: { maximum: 11 }
     validates :item_id
     validates :user_id
   end
