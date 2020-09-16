@@ -4,10 +4,9 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.includes(:item, :user)
-    if @item.user_id == current_user.id
+    if @item.user_id == current_user.id #出品者は自分の商品の注文ページに行けない
       redirect_to root_path
-    end
-    if @orders.exists?(item_id: @item.id)
+    elsif @orders.exists?(item_id: @item.id) #出品者以外でも売却済み商品の注文ページには行けない
       redirect_to root_path
     end
     @order = AddressOrder.new
