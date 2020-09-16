@@ -1,5 +1,5 @@
 const pay = () => {
-  PayJp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);                           //テスト用公開鍵
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);                           //テスト用公開鍵
   const form = document.getElementById("charge-form");
   form.addEventListener("submit", (e) =>{
     e.preventDefault();
@@ -14,7 +14,7 @@ const pay = () => {
       exp_year: `20${formData.get("exp_year")}`,
     };
 
-    PayJp.createToken(card, (status, response) => {
+    Payjp.createToken(card, (status, response) => {
       if (status === 200) {
         const token = response.id;                                            //レスポンスのHTTPステータスコードが正常(200)なら
         const renderDom = document.getElementById("charge-form");             //生成されたトークンを変数に代入する

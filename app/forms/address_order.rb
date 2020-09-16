@@ -18,7 +18,6 @@ class AddressOrder
     validates :city
     validates :house_number
     validates :telephone_number, format: { with: /\A\d{10,11}\z/ }
-    validates :order_id
     validates :item_id
     validates :user_id
   end
