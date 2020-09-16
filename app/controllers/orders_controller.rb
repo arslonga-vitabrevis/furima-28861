@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
       @order.save
       redirect_to root_path
     else
+      @order = AddressOrder.new(order_params)
       render :index
     end
   end
@@ -43,12 +44,12 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
+    @item = Item.find_by(id:params[:item_id])
     @secret_key = Rails.application.credentials.payjp_keys[:payjp_secret_key]
-
     Payjp.api_key = @secret_key
     Payjp::Charge.create(
-      amount: order_params[:price],
-      card: params[:token],
+      amount: @item.price,
+      card: order_params[:token],
       currency:'jpy'
     )
   end
