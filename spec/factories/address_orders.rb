@@ -1,20 +1,6 @@
 FactoryBot.define do
   factory :address_order do
 
-    # token = Payjp::Token.new(
-    #     {
-    #     :card => {
-    #       :number => '4242424242424242',
-    #       :cvc => '123',
-    #       :exp_month => '2',
-    #       :exp_year => '2024'
-    #       }
-    #     },
-    #     {
-    #       'X-Payjp-Direct-Token-Generate': 'true'
-    #     } 
-    #   )
-
     tok_num = Faker::Lorem.characters(number: 28)
 
     token             { "tok_#{tok_num}" }
