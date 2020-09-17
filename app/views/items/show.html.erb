@@ -24,13 +24,17 @@
     </div>
 
     <% if user_signed_in? && current_user.id == @item.user_id %>
-
       <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
       <p class='or-text'>or</p>
       <%= link_to '削除', item_path, method: :delete, class:'item-destroy' %>
     <% end %>
-    <% if user_signed_in? && current_user.id != @item.user_id %>
-    <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+    <%# ログイン済みの出品者、またはログイン済みの非出品者だがordersテーブルに@item.idが登録されている売却済商品はボタンを非表示 %>
+    <% if (user_signed_in? && current_user.id == @item.user_id)||(user_signed_in? && current_user.id != @item.user_id && @orders.exists?(item_id: @item.id)) %>
+    <div></div>
+    <% end %>
+    <%# ログイン済みの非出品者かつordersテーブルに@item.idが登録されていない未売却商品はボタンを表示 %>
+    <% if (user_signed_in? && current_user.id != @item.user_id)&&(user_signed_in? && current_user.id != @item.user_id && @orders.where(item_id: @item.id).empty?)%>
+    <%= link_to '購入画面に進む', "/items/#{@item.id}/orders" ,class:"item-red-btn"%>
     <% end %>
 
 
