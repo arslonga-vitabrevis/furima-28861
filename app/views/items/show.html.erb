@@ -19,7 +19,11 @@
         ¥<%= @item.price %>
       </span>
       <span class="item-postage">
-        (税込) 送料込み
+        <% if @item.shipping_charge_id == 1 %>
+          (税込)送料別
+        <% else @item.shipping_charge_id == 2 %>
+          (税込)送料込み
+        <% end %>
       </span>
     </div>
 
