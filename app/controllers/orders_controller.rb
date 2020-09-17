@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.includes(:item, :user)
-    if @item.user_id == current_user.id #出品者は自分の商品の注文ページに行けない
+    if @item.user_id == current_user.id      #出品者は自分の商品の注文ページに行けない
       redirect_to root_path
     elsif @orders.exists?(item_id: @item.id) #出品者以外でも売却済み商品の注文ページには行けない
       redirect_to root_path
@@ -39,11 +39,11 @@ class OrdersController < ApplicationController
   end
 
   def set_item
-    @item = Item.find_by(id:params[:item_id])
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item
-    @item = Item.find_by(id:params[:item_id])
+    @item = Item.find(params[:item_id])
     @secret_key = Rails.application.credentials.payjp_keys[:payjp_secret_key]
     Payjp.api_key = @secret_key
     Payjp::Charge.create(
